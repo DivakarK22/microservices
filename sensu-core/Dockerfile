@@ -5,7 +5,7 @@ FROM centos:7
 COPY ./ /etc/yum.repos.d/
 
 # Install necessary pkgs
-RUN yum install -y sensu uchiwa
+RUN yum install -y sensu
 
 # Expose sensu-api port
 EXPOSE 4567

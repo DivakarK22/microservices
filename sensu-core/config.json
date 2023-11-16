@@ -222,7 +222,7 @@
       }     
   },
   "client": {
-    "name": "Sensu-Master-Container",
+    "name": "Sensu-Container",
     "address": "127.0.0.1",
     "subscriptions": [
       "sensu"

@@ -6,6 +6,7 @@ COPY ./ /etc/yum.repos.d/
 
 # Install necessary pkgs
 RUN yum install -y sensu
+RUN yum install -y sudo
 
 # Expose sensu-api port
 EXPOSE 4567

@@ -1,3 +1,3 @@
 # microservices
 
-Sensu-core in container
+Apps in containers

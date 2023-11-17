@@ -4,9 +4,11 @@ FROM centos:7
 # Copy sensu repo
 COPY ./ /etc/yum.repos.d/
 
-# Install necessary pkgs
-RUN yum install -y sensu
-RUN yum install -y sudo
+# Install necessary pkg
+
+RUN yum -y epel-release sensu sudo python3 python3-pip && \
+    pip3 install requests && \
+    yum clean all
 
 # Expose sensu-api port
 EXPOSE 4567
@@ -19,6 +21,7 @@ COPY server.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/server.sh
 RUN chmod 777 /var/log/sensu/*
 
-
+#Copy Checks
+COPY checks /etc/sensu/
 # Define the command to start the service
 CMD /usr/local/bin/server.sh

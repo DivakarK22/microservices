@@ -6,7 +6,7 @@ COPY ./ /etc/yum.repos.d/
 
 # Install necessary pkg
 
-RUN yum -y epel-release sensu sudo python3 python3-pip && \
+RUN yum -y install epel-release sensu sudo python3 python3-pip && \
     pip3 install requests && \
     yum clean all
 

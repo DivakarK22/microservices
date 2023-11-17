@@ -23,5 +23,6 @@ RUN chmod 777 /var/log/sensu/*
 
 #Copy Checks
 COPY checks /etc/sensu/
+
 # Define the command to start the service
 CMD /usr/local/bin/server.sh

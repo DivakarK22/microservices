@@ -128,9 +128,9 @@
         "interval": 10
       },
       "docker": {
-        "command": "sudo /usr/local/rvm/rubies/ruby-2.7.2/bin/ruby /etc/sensu/conf.d/checks/check-process.rb -p docker",
+        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py docker",
         "subscribers": [
-          "client:docker.root.com",
+          "client:Home",
           "client:k8.root.com",
           "client:ansible.root.com"
         ],

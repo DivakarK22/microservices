@@ -74,19 +74,19 @@
       "jenkins-http": {
         "command": "sudo python3 /etc/sensu/checks/check-url.py http://192.168.1.10:8080",
         "subscribers": [
-          "el7"
+          "client:home"
         ],
         "interval": 100
       },
       "grafana-http": {
-        "command": "sudo python3 /etc/sensu/checks/check-url.py http://192.168.1.10:3001",
+        "command": "sudo /usr/local/rvm/rubies/ruby-2.7.2/bin/ruby /etc/sensu/conf.d/checks/check-http.rb -u http://grafana.root.com:3000 -U admin -a devops",
         "subscribers": [
-          "Master"
+          "client:grafana.root.com"
         ],
         "interval": 100
       },
-      "cockpit": {
-        "command": "sudo python3 /etc/sensu/checks/check-url.py http://192.168.1.10:9090",
+      "node-exporter": {
+        "command": "sudo /usr/local/rvm/rubies/ruby-2.7.2/bin/ruby /etc/sensu/conf.d/checks/check-process.rb -p node_exporter",
         "subscribers": [
           "el7"
         ],

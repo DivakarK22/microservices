@@ -20,11 +20,6 @@ if len(sys.argv) > 1:
         print(f"The process '{process_name_to_check}' is running.")
     else:
         print(f"The process '{process_name_to_check}' is not running.")
+        sys.exit(2)
 else:
     print("Please provide a process name as a command-line argument.")
-
-#if checkIfProcessRunning(sys.argv) > 1:
-#    
-#    print('Yes a chrome process was running')
-#else:
-#    print('No chrome process was running')

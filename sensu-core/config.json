@@ -206,55 +206,13 @@
         ],
         "interval": 10
       },
-      "metricbeat": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py metricbeat",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      },
       "node_exporter": {
         "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py node_exporter",
         "subscribers": [
           "client:Home"
         ],
         "interval": 10
-      },
-      "nfs-server": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py nfs-server",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      },
-      "firewalld": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py firewalld",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      },
-      "cockpit": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py cockpit",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      },
-      "uchiwa": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py uchiwa",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      },
-      "auditbeat": {
-        "command": "sudo python3 /etc/sensu/conf.d/checks/check_process.py auditbeat",
-        "subscribers": [
-          "client:Home"
-        ],
-        "interval": 10
-      }      
+      }     
   },
   "client": {
     "name": "Sensu-Container",

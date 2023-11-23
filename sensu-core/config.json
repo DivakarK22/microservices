@@ -1,17 +1,17 @@
 {
   "rabbitmq": {
-    "host": "192.168.1.10",
+    "host": "192.168.1.11",
     "port": 5672,
     "user": "sensu",
     "password": "sensu",
     "vhost": "/sensu"
   },
   "redis": {
-    "host": "192.168.1.10",
+    "host": "192.168.1.11",
     "port": 6379
   },
   "api": {
-    "host": "192.168.1.10",
+    "host": "192.168.1.11",
     "port": 4567
   },
   "handlers": {

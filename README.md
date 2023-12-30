@@ -1,5 +1,6 @@
 # microservices
 Apps in containers
+<<<<<<< HEAD
 
 
 curl --request POST \
@@ -37,3 +38,6 @@ curl --request POST \
     }
 }'
 
+=======
+Test
+>>>>>>> 18cb666f598bd3e44535268d63459dca609f62f3

@@ -15,14 +15,10 @@ RUN npm install
 COPY . .
 
 # Expose the port your app runs on (if needed)
-# EXPOSE 3000
-RUN rm -rf package-lock.json
-RUN yarn
-RUN yarn install
+EXPOSE 1234
+#RUN rm -rf package-lock.json
+#RUN yarn
+#RUN yarn install
 
 # Command to start the application
-<<<<<<< HEAD
 CMD ["npm", "start"]
-=======
-CMD ["npm", "start"]
->>>>>>> bfb1a152ba83888de390b78676783e194a385587

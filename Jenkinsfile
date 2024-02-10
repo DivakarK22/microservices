@@ -21,21 +21,21 @@ pipeline {
         stage('Build') {
             steps {
                 dir('/git/microservices/portfolio') {
-                    sh 'docker build -t portfolio .'
+                    sh 'sudo docker build -t portfolio .'
                 }
             }
         }
         
         stage('Deploy') {
             steps {
-                sh 'docker run -d --name portfolio -p 1234:1234 portfolio'
+                sh 'sudo docker run -d --name portfolio -p 1234:1234 portfolio'
             }
         }
         
         stage('Check the container is up') {
             steps {
                 script {
-                    def containerStatus = sh(returnStdout: true, script: 'docker ps -f name=portfolio --format "{{.Names}}"').trim()
+                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=portfolio --format "{{.Names}}"').trim()
                     if (containerStatus.contains('portfolio')) {
                         echo 'Container is running'
                     } else {

@@ -9,12 +9,6 @@ pipeline {
                 }
             }
         }
-        
-         && docker run -d --name=sensu-master -p 4567:4567  sensu-master &&  docker rm -f sensu-redis && docker run -d --name sensu-redis -p 6379:6379 redis:6.2 &&  docker rm -f sensu-rabbitmq &&   docker rm -f sensu-rabbitmq && docker run -d --name sensu-rabbitmq -p 5672:5672 -p 15672:15672 \
-    -e RABBITMQ_DEFAULT_USER=sensu \
-    -e RABBITMQ_DEFAULT_PASS=sensu \
-    -e RABBITMQ_DEFAULT_VHOST=/sensu \
-    rabbitmq:3-management
 
         stage('Clean images/containers') {
             steps {

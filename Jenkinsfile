@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout and Pull') {
             steps {
-                dir('/root/git/DivakarK22/microservices') {
+                dir('/git/microservices/') {
                     git branch: 'portfolio', url: 'https://github.com/DivakarK22/microservices.git'
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                dir('/root/git/DivakarK22/microservices/portfolio') {
+                dir('/git/microservices/portfolio') {
                     sh 'docker build -t portfolio .'
                 }
             }

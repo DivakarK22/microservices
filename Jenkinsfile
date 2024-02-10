@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('/git/microservices/sensu-core') {
-                    sh 'sudo docker build -t sensu-core .'
+                    sh 'sudo docker build --no-cache -t sensu-core .'
                 }
             }
         }

@@ -15,13 +15,14 @@ pipeline {
                 sh 'sudo docker rm -f sensu-master || true'
                 sh 'sudo docker rm -f sensu-redis || true'
                 sh 'sudo docker rm -f sensu-rabbitmq || true'
+                sh 'sudo docker rmi -f sensu-master || true'
             }
         }
         
         stage('Build') {
             steps {
                 dir('/git/microservices/sensu-core') {
-                    sh 'sudo docker build --no-cache -t sensu-core .'
+                    sh 'sudo docker build --no-cache -t sensu-master .'
                 }
             }
         }

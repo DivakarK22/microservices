@@ -1,34 +1,47 @@
 pipeline {
     agent any
+    
     stages {
         stage('Checkout and Pull') {
             steps {
-                cd /root/git/microservices
-                git checkout portfolio
-                git pull
+                dir('/root/git/microservices') {
+                    git branch: 'portfolio', url: 'https://example.com/repository.git'
+                }
             }
         }
+        
         stage('Clean images/containers') {
             steps {
-                sudo docker rmi -f portfolio 
-                sudo docker rm -f portfolio
-                sudo docker stop portfolio || true
+                sh 'docker rmi -f portfolio || true'
+                sh 'docker rm -f portfolio || true'
+                sh 'docker stop portfolio || true'
             }
         }
+        
         stage('Build') {
             steps {
-                cd /root/git/microservices/portfolio
-                sudo docker build -t portfolio .
+                dir('/root/git/microservices/portfolio') {
+                    sh 'docker build -t portfolio .'
+                }
             }
         }
+        
         stage('Deploy') {
             steps {
-                sudo docker run -d --name portfolio -p 1234:1234 portfolio
+                sh 'docker run -d --name portfolio -p 1234:1234 portfolio'
             }
         }
+        
         stage('Check the container is up') {
             steps {
-                docker ps -f name=portfolio --format '{{.Names}}' | grep -q portfolio && echo "Container is running" || echo "Container is not running"
+                script {
+                    def containerStatus = sh(returnStdout: true, script: 'docker ps -f name=portfolio --format "{{.Names}}"').trim()
+                    if (containerStatus.contains('portfolio')) {
+                        echo 'Container is running'
+                    } else {
+                        error 'Container is not running'
+                    }
+                }
             }
         }
     }

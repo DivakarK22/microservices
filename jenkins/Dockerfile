@@ -20,6 +20,7 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 # Set permissions if needed
 # Example:
 # RUN chmod +x /usr/local/bin/script.sh
+VOLUME /var/jenkins_home
 
 # Expose the Jenkins port
 EXPOSE 8080

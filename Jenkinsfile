@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout and Pull') {
             steps {
                 dir('/root/git/microservices') {
-                    git branch: 'portfolio', url: 'https://example.com/repository.git'
+                    git branch: 'portfolio', url: 'https://github.com/DivakarK22/microservices.git'
                 }
             }
         }

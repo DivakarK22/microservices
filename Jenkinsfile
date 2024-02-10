@@ -37,7 +37,7 @@ pipeline {
         stage('Check the container is up') {
             steps {
                 script {
-                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=sensu-core --format "{{.Names}}"').trim()
+                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=sensu-master --format "{{.Names}}"').trim()
                     if (containerStatus.contains('sensu-master')) {
                         echo 'Container is running'
                     } else {

@@ -1,22 +1,35 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Checkout and Pull') {
             steps {
-                echo 'Building the application...'
-                // Add build steps here
+                cd /root/git/microservices
+                git checkout portfolio
+                git pull
+
             }
         }
-        stage('Test') {
+        stage('Clean images/containers') {
             steps {
-                echo 'Running tests...'
-                // Add test steps here
+                sudo docker rmi -f portfolio 
+                sudo docker rm -f portfolio
+                sudo docker stop portfolio || true
+            }
+        }
+        stage('Build') {
+            steps {
+                cd /root/git/microservices/portfolio
+                sudo docker build -t portfolio .
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
-                // Add deployment steps here
+                sudo docker run -d --name portfolio -p 1234:1234 portfolio
+            }
+        }
+        stage('Check the container is up') {
+            steps {
+                docker ps -f name=portfolio --format '{{.Names}}' | grep -q portfolio && echo "Container is running" || echo "Container is not running"
             }
         }
     }

@@ -6,7 +6,6 @@ pipeline {
                 cd /root/git/microservices
                 git checkout portfolio
                 git pull
-
             }
         }
         stage('Clean images/containers') {

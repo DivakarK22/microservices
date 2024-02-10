@@ -39,7 +39,7 @@ pipeline {
                 script {
                     def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=sensu-master --format "{{.Names}}"').trim()
                     if (containerStatus.contains('sensu-master')) {
-                        echo 'Container is running'
+                        echo 'Container sensu-master is running'
                     } else {
                         error 'Container is not running'
                     }

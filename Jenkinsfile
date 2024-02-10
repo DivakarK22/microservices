@@ -27,7 +27,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh 'sudo docker run -d --name=jenkins-local -p 4567:4567  jenkins-local'
+                sh 'sudo docker run -d --name=jenkins-local -p 8081:8080  jenkins-local'
             }
         }
         

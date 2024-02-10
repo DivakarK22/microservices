@@ -15,8 +15,6 @@ pipeline {
                 sh 'sudo docker rm -f sensu-master || true'
                 sh 'sudo docker rm -f sensu-redis || true'
                 sh 'sudo docker rm -f sensu-rabbitmq || true'
-                sh 'sudo docker rm -f portfolio || true'
-                sh 'sudo docker stop portfolio || true'
             }
         }
         

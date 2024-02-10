@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout and Pull') {
             steps {
-                dir('/root/git/microservices') {
+                dir('/root/git/DivakarK22/microservices') {
                     git branch: 'portfolio', url: 'https://github.com/DivakarK22/microservices.git'
                 }
             }
@@ -12,15 +12,15 @@ pipeline {
         
         stage('Clean images/containers') {
             steps {
-                sh 'docker rmi -f portfolio || true'
-                sh 'docker rm -f portfolio || true'
-                sh 'docker stop portfolio || true'
+                sh 'sudo docker rmi -f portfolio || true'
+                sh 'sudo docker rm -f portfolio || true'
+                sh 'sudo docker stop portfolio || true'
             }
         }
         
         stage('Build') {
             steps {
-                dir('/root/git/microservices/portfolio') {
+                dir('/root/git/DivakarK22/microservices/portfolio') {
                     sh 'docker build -t portfolio .'
                 }
             }

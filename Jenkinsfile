@@ -1,11 +1,29 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout and Pull') {
+        stage('Checkout') {
             steps {
+                // Checkout the Git repository
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/jenkins-centos-docker-tomcat']], 
+                          userRemoteConfigs: [[url: 'https://github.com/DivakarK22/microservices.git']]])
+            }
+        }
+        stage('Git Checkout') {
+            steps {
+                // Change to the repository directory
                 dir('/git/microservices/') {
-                    sh 'sudo git checkout -b jenkins-centos-docker-tomcat'
-                    sh 'sudo git pull origin jenkins-centos-docker-tomcat'
+                    // Checkout the desired branch or commit
+                    sh 'git checkout jenkins-centos-docker-tomcat'
+                }
+            }
+        }
+        stage('Git Pull') {
+            steps {
+                // Change to the repository directory
+                dir('/git/microservices/') {
+                    // Pull the latest changes from the remote repository
+                    sh 'git pull origin jenkins-centos-docker-tomcat'
                 }
             }
         }

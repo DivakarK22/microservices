@@ -1,4 +1,4 @@
-# Use the official Jenkins image from Docker Hub
+# Use the official Jenkins image from Docker Hub#
 FROM centos:7
 
 #Install Java and tomcat and move to path

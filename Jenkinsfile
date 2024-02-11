@@ -19,7 +19,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                dir('/git/microservices/jenkins') {
+                dir('/git/microservices/jenkins-tomcat') {
                     sh 'sudo docker build --no-cache -t jenkins-tomcat .'
                 }
             }

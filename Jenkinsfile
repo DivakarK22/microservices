@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent Ansible(deploy)
     stages {
         stage('Checkout and Pull') {
             steps {

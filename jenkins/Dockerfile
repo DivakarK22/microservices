@@ -1,20 +1,21 @@
 # Use the official Jenkins image from Docker Hub
-FROM jenkins/jenkins:latest
+FROM centos:7
 
-# Skip the initial setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+#Install Java and tomcat
+RUN yum install sudo wget epel-release java-11-openjdk-devel  -y && \
+    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") && \
+    source ~/.bashrc && \
+    wget --no-check-certificate https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.18/bin/apache-tomcat-10.1.18.tar.gz  -O /tmp/tomcat.tar.gz && \
+    tar -xvf /tmp/tomcat.tar.gz -C /tmp/ && \
+    mv /tmp/apache-tomcat-10.1.18 /opt/ && \
+    mv /opt/apache-tomcat-10.1.18 /opt/tomcat && \
+    export CATALINA_HOME=/opt/tomcat && \
+    rm -rf /opt/tomcat/webapps/* && \
+    source ~/.bashrc
 
-# Copy Jenkins configuration files (optional)
-# COPY config/* /var/jenkins_home/
+COPY ./ROOT.war /opt/tomcat/webapps
 
-# Expose port 8080 for Jenkins web interface
+# Expose the Jenkins port
 EXPOSE 8080
-
-# Expose port 50000 for Jenkins agent communication
-EXPOSE 50000
-
-# Set the Jenkins home directory
-ENV JENKINS_HOME /var/jenkins_home
-
-# Run Jenkins as the Jenkins user (UID 1000) to avoid permission issues
-USER jenkins
+# Start Jenkins
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]

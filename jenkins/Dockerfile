@@ -1,21 +1,22 @@
 # Use the official Jenkins image from Docker Hub
 FROM centos:7
 
-#Install Java and tomcat
+#Install Java and tomcat and move to path
 RUN yum install sudo wget epel-release java-11-openjdk-devel  -y && \
-    export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") && \
-    source ~/.bashrc && \
-    wget --no-check-certificate https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.18/bin/apache-tomcat-10.1.18.tar.gz  -O /tmp/tomcat.tar.gz && \
+    wget --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz  -O /tmp/tomcat.tar.gz && \
     tar -xvf /tmp/tomcat.tar.gz -C /tmp/ && \
-    mv /tmp/apache-tomcat-10.1.18 /opt/ && \
-    mv /opt/apache-tomcat-10.1.18 /opt/tomcat && \
-    export CATALINA_HOME=/opt/tomcat && \
-    rm -rf /opt/tomcat/webapps/* && \
-    source ~/.bashrc
-#Copy jenkins war
-COPY ./ROOT.war /opt/tomcat/webapps
+    mv /tmp/apache-tomcat-8.5.98 /opt/ && \
+    mv /opt/apache-tomcat-8.5.98 /opt/tomcat
+
+#Remove default war's from webapps folder
+RUN rm -rf /opt/tomcat/webapps/*
+
+#Copy or Download war file
+#COPY ./ROOT.war /opt/tomcat/webapps/
+RUN wget --no-check-certificate https://updates.jenkins.io/download/war/2.387.1/jenkins.war -O /opt/tomcat/webapps/ROOT.war
 
 # Expose the Jenkins port
 EXPOSE 8080
+
 # Start Jenkins
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]

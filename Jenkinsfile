@@ -4,8 +4,8 @@ pipeline {
         stage('Checkout and Pull') {
             steps {
                 dir('/git/microservices/') {
-                    sh 'git checkout -b jenkins-centos-docker-tomcat'
-                    sh 'git pull origin jenkins-centos-docker-tomcat'
+                    sh 'sudo git checkout -b jenkins-centos-docker-tomcat'
+                    sh 'sudo git pull origin jenkins-centos-docker-tomcat'
                 }
             }
         }

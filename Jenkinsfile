@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'sudo docker stop jenkins-tomcat || true'
-                sh 'sudo docker run -d --name jenkins-tomcat -p 8081:8080 -p 50001:50000 jenkins-tomcat || true'
+                sh 'sudo docker run -d --name jenkins-tomcat -p 8082:8080 -p 50001:50000 jenkins-tomcat || true'
             }
         }
         

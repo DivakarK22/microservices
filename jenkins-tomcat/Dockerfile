@@ -6,7 +6,9 @@ FROM tomcat:latest
 
 # Copy Jenkins configuration files (optional)
 # COPY config/* /var/jenkins_home/
-COPY ./jenkins.war /opt/tomcat/webapps/
+#COPY ./jenkins.war /opt/tomcat/webapps/
+RUN wget --no-check-certificate https://updates.jenkins.io/download/war/2.387.1/jenkins.war -O /opt/tomcat/webapps/ROOT.war
+
 
 # Expose port 8080 for Jenkins web interface
 EXPOSE 8080

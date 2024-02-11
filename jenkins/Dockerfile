@@ -12,7 +12,7 @@ RUN yum install sudo wget epel-release java-11-openjdk-devel  -y && \
     export CATALINA_HOME=/opt/tomcat && \
     rm -rf /opt/tomcat/webapps/* && \
     source ~/.bashrc
-
+#Copy jenkins war
 COPY ./ROOT.war /opt/tomcat/webapps
 
 # Expose the Jenkins port

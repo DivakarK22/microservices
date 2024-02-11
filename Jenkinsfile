@@ -3,10 +3,10 @@ pipeline {
     stages {
         stage('Checkout and Pull') {
             steps {
-                sh 'cd /git/microservices'
-                sh 'git checkout -b jenkins-centos-docker-tomcat'
-                sh 'git pull origin jenkins-centos-docker-tomcat'
-                sh 'git status'
+                dir('/git/microservices/') {
+                    sh 'git checkout -b jenkins-centos-docker-tomcat'
+                    sh 'git pull origin jenkins-centos-docker-tomcat'
+                }
             }
         }
         stage('Clean images/containers') {

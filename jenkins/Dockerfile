@@ -1,29 +1,20 @@
 # Use the official Jenkins image from Docker Hub
 FROM jenkins/jenkins:latest
 
-# Skip initial setup wizard
+# Skip the initial setup wizard
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-# Install any plugins you need using the install-plugins.sh script
-# Example:
-# COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-# RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+# Copy Jenkins configuration files (optional)
+# COPY config/* /var/jenkins_home/
 
-# Copy your Jenkins configuration files if needed
-# Example:
-# COPY config.xml /var/jenkins_home/config.xml
-
-# Copy any custom scripts or files you need
-# Example:
-# COPY script.sh /usr/local/bin/script.sh
-
-# Set permissions if needed
-# Example:
-# RUN chmod +x /usr/local/bin/script.sh
-VOLUME /var/jenkins_home
-
-# Expose the Jenkins port
+# Expose port 8080 for Jenkins web interface
 EXPOSE 8080
 
-# Start Jenkins
-CMD ["java", "-jar", "/usr/share/jenkins/jenkins.war"]
+# Expose port 50000 for Jenkins agent communication
+EXPOSE 50000
+
+# Set the Jenkins home directory
+ENV JENKINS_HOME /var/jenkins_home
+
+# Run Jenkins as the Jenkins user (UID 1000) to avoid permission issues
+USER jenkins

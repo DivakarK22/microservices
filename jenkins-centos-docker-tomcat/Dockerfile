@@ -13,7 +13,7 @@ RUN rm -rf /opt/tomcat/webapps/*
 
 #Copy or Download war file
 #COPY ./ROOT.war /opt/tomcat/webapps/
-RUN wget --no-check-certificate https://updates.jenkins.io/download/war/2.426/jenkins.war -O /opt/tomcat/webapps/ROOT.war
+RUN wget --no-check-certificate https://updates.jenkins.io/download/war/2.414.3/jenkins.war -O /opt/tomcat/webapps/ROOT.war
 
 # Expose the Jenkins port
 EXPOSE 8080

@@ -24,12 +24,24 @@ pipeline {
                 sh 'docker run -d -p 9080:9090 --name prometheus -v /prom_grafana_data/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file="/etc/prometheus/prometheus.yml"'
             }
         }     
-        stage('Check the container is up') {
+        stage('Check the Grafana container is up') {
             steps {
                 script {
-                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=jenkins-centos-docker-tomcat --format "{{.Names}}"').trim()
+                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=grafana --format "{{.Names}}"').trim()
                     if (containerStatus.contains('grafana')) {
                         echo 'Container grafana is running'
+                    } else {
+                        error 'Container is not running'
+                    }
+                }
+            }
+        }
+        stage('Check the Prometheus container is up') {
+            steps {
+                script {
+                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=prometheus --format "{{.Names}}"').trim()
+                    if (containerStatus.contains('prometheus')) {
+                        echo 'Container prometheus is running'
                     } else {
                         error 'Container is not running'
                     }

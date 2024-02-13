@@ -8,7 +8,7 @@ pipeline {
                 }
             }
         }
-        stage('Clean images/containers') {
+        stage('Clean images and containers') {
             steps {
                 sh 'sudo docker rm -f grafana || true'
                 sh 'sudo docker rmi -f grafana || true'

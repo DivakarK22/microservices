@@ -34,6 +34,15 @@ pipeline {
                 sh 'sudo docker run -d --name=sensu-master -p 4567:4567  sensu-master'
             }
         }
+
+        stage('Update checks locally') {
+            steps {
+                sh 'cd /git/microservices/'
+                sh 'git checkout -b sensu-core'
+                sh 'git pull origin sensu-core'
+            }
+        }
+
         
         stage('Check the container is up') {
             steps {

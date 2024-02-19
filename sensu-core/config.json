@@ -232,8 +232,7 @@
   "handlers": {
     "create_ticket": {
       "type": "pipe",
-      "command": "python3 /etc/sensu/checks/handler/disk/create_ticket.py >> /etc/disk_ticket.txt",
-      "handle_flapping": false
+      "command": "sudo python3 /etc/sensu/checks/handler/disk/create_ticket.py >> /etc/disk_ticket.txt"
     }
   },
   "handlers": {

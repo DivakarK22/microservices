@@ -218,7 +218,8 @@
         "subscribers": [
           "client:Home"
         ],
-        "interval": 10
+        "interval": 43200,
+        "handlers": ["create_ticket","resolve_ticket"]
       }      
   },
   "client": {
@@ -227,5 +228,19 @@
     "subscriptions": [
       "Master"
     ]
+  },
+  "handlers": {
+    "create_ticket": {
+      "type": "pipe",
+      "command": "python3 /etc/sensu/checks/handlers/create_ticket.py >> /etc/sensu/checks/handlers/disk_ticket.txt",
+      "handle_flapping": false
+    }
+  },
+  "handlers": {
+    "resolve_ticket": {
+      "type": "pipe",
+      "command": "bash /etc/sensu/checks/handlers/resolve_master.sh",
+      "timeout": 60
+    }
   }
 }

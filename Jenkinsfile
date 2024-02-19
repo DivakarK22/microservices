@@ -38,7 +38,6 @@ pipeline {
         stage('Update checks locally') {
             steps {
                 sh 'cd /git/microservices/'
-                sh 'git checkout -b sensu-core'
                 sh 'git pull origin sensu-core'
             }
         }

@@ -214,7 +214,7 @@
         "interval": 10
       },
       "check-space": {
-        "command": "sudo bash /git/microservices/sensu-core/checks/check-space.sh /root 24",
+        "command": "sudo bash /git/microservices/sensu-core/checks/check-space.sh /root 20",
         "subscribers": [
           "client:Home"
         ],

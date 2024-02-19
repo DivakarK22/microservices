@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Assuming your text file is named "commands.txt"
-input_file="/etc/sensu/checks/handlers/disk_ticket.txt"
+input_file="/etc/disk_ticket.txt"
 
 # Read each line from the input file
 while IFS= read -r line; do
@@ -23,4 +23,4 @@ while IFS= read -r line; do
 
 done < "$input_file"
 
-rm -rf /etc/sensu/checks/handlers/disk_ticket.txt
+rm -rf /etc/disk_ticket.txt

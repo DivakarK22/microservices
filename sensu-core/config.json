@@ -232,14 +232,14 @@
   "handlers": {
     "create_ticket": {
       "type": "pipe",
-      "command": "python3 /etc/sensu/checks/handlers/create_ticket.py >> /etc/sensu/checks/handlers/disk_ticket.txt",
+      "command": "python3 /etc/sensu/checks/handler/create_ticket.py >> /etc/disk_ticket.txt",
       "handle_flapping": false
     }
   },
   "handlers": {
     "resolve_ticket": {
       "type": "pipe",
-      "command": "bash /etc/sensu/checks/handlers/resolve_master.sh",
+      "command": "bash /etc/sensu/checks/handler/resolve_master.sh",
       "timeout": 60
     }
   }

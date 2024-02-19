@@ -214,7 +214,7 @@
         "interval": 10
       },
       "check-space": {
-        "command": "sudo bash /git/microservices/sensu-core/checks/check-space.sh /root 26",
+        "command": "sudo bash /git/microservices/sensu-core/checks/check-space.sh /root 24",
         "subscribers": [
           "client:Home"
         ],
@@ -232,14 +232,14 @@
   "handlers": {
     "create_ticket": {
       "type": "pipe",
-      "command": "python3 /etc/sensu/checks/handler/create_ticket.py >> /etc/disk_ticket.txt",
+      "command": "python3 /etc/sensu/checks/handler/disk/create_ticket.py >> /etc/disk_ticket.txt",
       "handle_flapping": false
     }
   },
   "handlers": {
     "resolve_ticket": {
       "type": "pipe",
-      "command": "bash /etc/sensu/checks/handler/resolve_master.sh",
+      "command": "bash /etc/sensu/checks/handler/disk/resolve_master.sh",
       "timeout": 60
     }
   }

@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'sudo docker stop jenkins-centos-docker-tomcat || true'
-                sh 'sudo docker run -v /var/lib/jenkins/:/root/.jenkins -d --name  jenkins-centos-docker-tomcat -p 8083:8080 jenkins-centos-docker-tomcat || true'
+                sh 'sudo docker run -v /var/lib/jenkins/:/root/.jenkins -d --name  jenkins-centos-docker-tomcat -p 8083:8080 -p 1122:1122 -p 50000:50000 jenkins-centos-docker-tomcat || true'
             }
         }     
         stage('Check the container is up') {

@@ -17,6 +17,8 @@ RUN wget --no-check-certificate https://updates.jenkins.io/download/war/2.414.3/
 
 # Expose the Jenkins port
 EXPOSE 8080
+EXPOSE 1122
+EXPOSE 50000
 
 # Start Jenkins
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]

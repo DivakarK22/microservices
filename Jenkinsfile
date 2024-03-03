@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('/git/microservices/jenkins-alma-docker-tomcat') {
-                    sh 'sudo docker build --no-cache -t jenkins-alma-docker-tomcat .'
+                    sh 'sudo docker build -t jenkins-alma-docker-tomcat .'
                 }
             }
         }

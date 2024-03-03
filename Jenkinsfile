@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'sudo docker stop jenkins-alma-docker-tomcat || true'
-                sh 'sudo docker run -v /jenkins_backup/jenkins-docker/var/lib/jenkins/:/root/.jenkins -d --name  jenkins-alma-docker-tomcat -p 8083:8080 jenkins-alma-docker-tomcat || true'
+                sh 'sudo docker run -v /jenkins_backup/jenkins-docker:/root/.jenkins -d --name  jenkins-alma-docker-tomcat -p 8083:8080 jenkins-alma-docker-tomcat || true'
             }
         }     
         stage('Check the container is up') {

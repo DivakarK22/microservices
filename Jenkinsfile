@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh 'cd /jenkins_backup/ || true'
                 sh 'rm -rf var || true'
-                sh 'unzip /jenkins_backup/* || true '
+                sh 'unzip /jenkins_backup/202* || true '
                 sh 'mkdir /jenkins_backup/jenkins-docker || true'
                 sh 'cp -R /jenkins_backup/jenkins-docker/var /jenkins_backup/jenkins-docker || true'
                 sh 'rm -rf /jenkins_backup/jenkins-docker/var || true'

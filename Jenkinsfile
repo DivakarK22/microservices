@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Restore Jenkins Backups to use as Volume') {
             steps {
-                sh 'rsync -av --delete --update /var/lib/jenkins/ /jenkins_backup/jenkins-alma-docker-tomcat/'
+                sh 'rsync -av --delete --update /var/lib/jenkins/ /jenkins_backup/jenkins-alma-docker-tomcat/ || true'
             }
         }        
         stage('Deploy') {

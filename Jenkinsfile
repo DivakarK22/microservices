@@ -23,17 +23,13 @@ pipeline {
         }
         stage('Restore Jenkins Backups to use as Volume') {
             steps {
-                sh 'cd /jenkins_backup/ || true'
-                sh 'rm -rf var || true'
-                sh 'unzip /jenkins_backup/* || true '
-                sh 'mkdir /jenkins_backup/jenkins-alma-docker-tomcat || true'
-                sh 'cp -R /jenkins_backup/var /jenkins_backup/jenkins-alma-docker-tomcat || true'
+                sh 'rsync -av --delete --update /var/lib/jenkins/ /jenkins_backup/jenkins-alma-docker-tomcat/'
             }
         }        
         stage('Deploy') {
             steps {
                 sh 'sudo docker stop jenkins-alma-docker-tomcat || true'
-                sh 'sudo docker run -v /jenkins_backup/jenkins-alma-docker-tomcat/var/lib/jenkins/:/root/.jenkins -d --name  jenkins-alma-docker-tomcat -p 8083:8080 jenkins-alma-docker-tomcat || true'
+                sh 'sudo docker run -v /jenkins_backup/jenkins-alma-docker-tomcat:/root/.jenkins -d --name  jenkins-alma-docker-tomcat -p 8083:8080 jenkins-alma-docker-tomcat || true'
             }
         }     
         stage('Check the container is up') {

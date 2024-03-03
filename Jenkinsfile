@@ -23,11 +23,11 @@ pipeline {
         }
         stage('Restore Jenkins Backups to use as Volume') {
             steps {
-                sh 'cd /jenkins_backup/'
+                sh 'cd /jenkins_backup/ || true'
                 sh 'rm -rf var || true'
-                sh 'unzip /jenkins_backup/*'
-                sh 'mkdir /jenkins_backup/jenkins-alma-docker-tomcat
-                sh 'cp -R /jenkins_backup/var /jenkins_backup/jenkins-alma-docker-tomcat'
+                sh 'unzip /jenkins_backup/* || true '
+                sh 'mkdir /jenkins_backup/jenkins-alma-docker-tomcat || true'
+                sh 'cp -R /jenkins_backup/var /jenkins_backup/jenkins-alma-docker-tomcat || true'
             }
         }        
         stage('Deploy') {

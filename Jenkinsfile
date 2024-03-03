@@ -29,6 +29,7 @@ pipeline {
                 sh 'mkdir /jenkins_backup/jenkins-docker || true'
                 sh 'cp -R /jenkins_backup/jenkins-docker/var /jenkins_backup/jenkins-docker || true'
                 sh 'rm -rf /jenkins_backup/jenkins-docker/var || true'
+                sh 'chown -R jenkins:jenkins /jenkins_backup/jenkins-docker/*'
             }
         }        
         stage('Deploy') {

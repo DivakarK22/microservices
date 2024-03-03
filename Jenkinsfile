@@ -27,7 +27,8 @@ pipeline {
                 sh 'rm -rf var || true'
                 sh 'unzip /jenkins_backup/* || true '
                 sh 'mkdir /jenkins_backup/jenkins-docker || true'
-                sh 'cp -R /jenkins_backup/var /jenkins_backup/jenkins-docker || true'
+                sh 'cp -R /jenkins_backup/jenkins-docker/var /jenkins_backup/jenkins-docker || true'
+                sh 'rm -rf /jenkins_backup/jenkins-docker/var || true'
             }
         }        
         stage('Deploy') {

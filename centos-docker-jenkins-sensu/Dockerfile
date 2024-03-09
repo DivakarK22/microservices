@@ -33,4 +33,4 @@ EXPOSE 4567
 RUN chmod +x /usr/local/bin/server.sh
 
 # Start Jenkins
-CMD [ "/usr/local/bin/server.sh", "/opt/tomcat/bin/catalina.sh", "run" ]
+CMD [ "/usr/local/bin/server.sh" ]

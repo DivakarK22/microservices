@@ -4,20 +4,20 @@ pipeline {
         stage('Checkout and Pull') {
             steps {
                 dir('/git/microservices') {
-                    git branch: 'jenkins-alma-docker-tomcat', url: 'https://github.com/DivakarK22/microservices.git'
+                    git branch: 'centos-docker-jenkins-sensu', url: 'https://github.com/DivakarK22/microservices.git'
                 }
             }
         }
         stage('Clean images/containers') {
             steps {
-                sh 'sudo docker rm -f jenkins-alma-docker-tomcat || true'
-                sh 'sudo docker rmi -f jenkins-alma-docker-tomcat || true'
+                sh 'sudo docker rm -f centos-docker-jenkins-sensu || true'
+                sh 'sudo docker rmi -f centos-docker-jenkins-sensu || true'
             }
         }     
         stage('Build') {
             steps {
-                dir('/git/microservices/jenkins-alma-docker-tomcat') {
-                    sh 'sudo docker build --no-cache -t jenkins-alma-docker-tomcat .'
+                dir('/git/microservices/centos-docker-jenkins-sensu') {
+                    sh 'sudo docker build --no-cache -t centos-docker-jenkins-sensu .'
                 }
             }
         }
@@ -34,15 +34,15 @@ pipeline {
         }        
         stage('Deploy') {
             steps {
-                sh 'sudo docker stop jenkins-alma-docker-tomcat || true'
-                sh 'sudo docker run -v /jenkins_backup/jenkins-docker:/root/.jenkins -d --name  jenkins-alma-docker-tomcat -p 8083:8080 jenkins-alma-docker-tomcat || true'
+                sh 'sudo docker stop centos-docker-jenkins-sensu || true'
+                sh 'sudo docker run -v /jenkins_backup/jenkins-docker:/root/.jenkins -d --name  centos-docker-jenkins-sensu -p 8083:8080 centos-docker-jenkins-sensu || true'
             }
         }     
         stage('Check the container is up') {
             steps {
                 script {
-                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=jenkins-alma-docker-tomcat --format "{{.Names}}"').trim()
-                    if (containerStatus.contains('jenkins-alma-docker-tomcat')) {
+                    def containerStatus = sh(returnStdout: true, script: 'sudo docker ps -f name=centos-docker-jenkins-sensu --format "{{.Names}}"').trim()
+                    if (containerStatus.contains('centos-docker-jenkins-sensu')) {
                         echo 'Container jenkins is running'
                     } else {
                         error 'Container is not running'

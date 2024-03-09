@@ -7,13 +7,11 @@ COPY server.sh /usr/local/bin/
 
 
 #Install Java and tomcat and move to path
-RUN yum install sudo wget epel-release java-11-openjdk-devel sensu python3 python3-pip  -y && \
+RUN yum install sudo wget epel-release java-11-openjdk-devel sensu  -y && \
     wget --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz  -O /tmp/tomcat.tar.gz && \
     tar -xvf /tmp/tomcat.tar.gz -C /tmp/ && \
     mv /tmp/apache-tomcat-8.5.98 /opt/ && \
-    mv /opt/apache-tomcat-8.5.98 /opt/tomcat \
-    pip3 install requests && \
-    yum clean all
+    mv /opt/apache-tomcat-8.5.98 /opt/tomcat 
 
 
 #Remove default war's from webapps folder

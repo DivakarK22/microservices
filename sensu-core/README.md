@@ -26,3 +26,5 @@ uchiwa.json -->
     "refresh": 5
   }
 }
+
+Dockerfile-Client for installing only sensu-client on containers.

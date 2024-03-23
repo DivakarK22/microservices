@@ -1,0 +1,20 @@
+{
+    "rabbitmq": {
+      "host": "192.168.1.10",
+      "port": 5672,
+      "user": "sensu",
+      "password": "sensu",
+      "vhost": "/sensu"
+    },
+      "transport": {
+        "name": "rabbitmq",
+        "reconnect_on_error": true
+    },
+    "client": {
+      "name": "alma",
+      "address": "192.168.1.15",
+      "subscriptions": [
+        "home"
+      ]
+    }
+  }

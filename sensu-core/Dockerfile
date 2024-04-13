@@ -14,7 +14,7 @@ RUN yum -y install epel-release sensu sudo python3 python3-pip uchiwa && \
 EXPOSE 4567
 EXPOSE 3000
 # Copy Sensu and Uchiwa Configs
-COPY uchiwa/config.json /etc/uchiwa
+COPY uchiwa/uchiwa.json /etc/uchiwa
 COPY ./ /etc/sensu/
 
 # Copy startup script

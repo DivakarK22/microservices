@@ -10,10 +10,10 @@ RUN yum -y install epel-release sensu sudo python3 python3-pip uchiwa && \
     pip3 install requests && \
     yum clean all
 
-# Expose sensu-api port
+# Expose sensu-api port and uchiwa port
 EXPOSE 4567
 EXPOSE 3000
-# Copy Sensu Configs
+# Copy Sensu and Uchiwa Configs
 COPY uchiwa/config.json /etc/uchiwa
 COPY ./ /etc/sensu/
 

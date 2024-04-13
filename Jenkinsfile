@@ -55,5 +55,14 @@ pipeline {
                 }
             }
         }
+        stage('Pushing Latest image to Dockerhub'){
+            steps {
+                script {
+                    sh 'docker tag sensu-master divakar2201/microservices:sensu-master'
+                    sh 'docker push divakar2201/microservices:sensu-master'
+                }
+            }
+        }
+
     }
 }

@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'sudo docker run -d --name sensu-redis -p 6379:6379 redis:6.2'
                 sh 'sudo docker run -d --name sensu-rabbitmq -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=sensu -e RABBITMQ_DEFAULT_PASS=sensu -e RABBITMQ_DEFAULT_VHOST=/sensu rabbitmq:3-management'
-                sh 'sudo docker run -d --name=sensu-master -p 4567:4567  sensu-master'
+                sh 'sudo docker run -d --name=sensu-master -p 4567:4567 -p 3002:3000 sensu-master'
             }
         }
 

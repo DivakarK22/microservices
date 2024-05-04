@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'Ansible(deploy)'
+    }
     stages {
         stage('Checkout and Pull') {
             steps {

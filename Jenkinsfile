@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'alma-ansible'
+    }
     stages {
         stage('Checkout and Pull') {
             steps {

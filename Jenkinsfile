@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'alma-ansible'
+        label 'Ansible(deploy'
     }
     stages {
         stage('Checkout and Pull') {

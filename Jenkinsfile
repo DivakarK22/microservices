@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout and Pull') {
+        stage('Checkout-and-Pull') {
             steps {
                 dir('/git/microservices') {
                     git branch: 'jenkins-alma-docker-tomcat', url: 'https://github.com/DivakarK22/microservices.git'

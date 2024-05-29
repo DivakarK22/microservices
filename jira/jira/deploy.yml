@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jira-replicaset
+  labels:
+    app: jira
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jira
+  template:
+    metadata:
+      labels:
+        app: jira
+    spec:
+      containers:
+      - name: jira-container
+        image: divakar2201/microservices:jira
+        ports:
+        - containerPort: 8080

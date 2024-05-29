@@ -14,4 +14,4 @@ docker build -t psql
 
 docker run -d -p 5432:5432 --name psql psql
 
-Open localhost:8080 to start jira initial setup add the db.
+Open localhost:8080 to start jira initial setup ,add the db we created.

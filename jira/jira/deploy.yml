@@ -19,3 +19,11 @@ spec:
         image: divakar2201/microservices:jira
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - mountPath: /var/atlassian/application-data/jira
+          name: jiradb
+      volumes: 
+        - name: jiradb
+          hostPath:
+            path: /opt/pv/jira/
+            type: DirectoryOrCreate

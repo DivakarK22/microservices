@@ -1,0 +1,12 @@
+:80
+
+# Jenkins configuration
+route /jenkins* {
+    uri strip_prefix /jenkins
+    reverse_proxy http://192.168.1.7:8081
+}
+
+# Jira configuration
+route /jira* {
+    reverse_proxy http://192.168.1.7:8080
+}

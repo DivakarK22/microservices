@@ -1,0 +1,170 @@
+# PersistentVolume for Jira
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jira-pv1
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /Volumes/k8/jira
+---
+# PersistentVolumeClaim for Jira
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jira-pvc1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: manual
+---
+# PersistentVolume for PostgreSQL
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: psql-pv1
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /Volumes/k8/psql
+---
+# PersistentVolumeClaim for PostgreSQL
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: psql-pvc1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: manual
+---
+# StatefulSet for Jira
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jira
+spec:
+  serviceName: "jira"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jira
+  template:
+    metadata:
+      labels:
+        app: jira
+    spec:
+      containers:
+      - name: jira
+        image: divakar2201/microservices:jira
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: jira-storage
+          mountPath: /var/atlassian/application-data/jira
+        env:
+        - name: DB_HOST
+          value: "psql-service"
+        - name: DB_PORT
+          value: "5432"
+      volumes:
+      - name: jira-storage
+        persistentVolumeClaim:
+          claimName: jira-pvc1
+---
+# Service for Jira (NodePort)
+apiVersion: v1
+kind: Service
+metadata:
+  name: jira
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30000  # Specify a nodePort in the range 30000-32767
+  selector:
+    app: jira
+---
+# StatefulSet for PostgreSQL
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: psql
+spec:
+  serviceName: "psql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: psql
+  template:
+    metadata:
+      labels:
+        app: psql
+    spec:
+      containers:
+      - name: psql
+        image: divakar2201/microservices:psql
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: psql-storage
+          mountPath: /var/lib/postgresql/data
+        env:
+        - name: POSTGRES_DB
+          value: "jira"
+        - name: POSTGRES_USER
+          value: "jira"
+        - name: POSTGRES_PASSWORD
+          value: "jira"
+      volumes:
+      - name: psql-storage
+        persistentVolumeClaim:
+          claimName: psql-pvc1
+---
+# Service for PostgreSQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: psql-service
+spec:
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: psql
+---
+# Ingress for Jira
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jira-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jira
+            port:
+              number: 8080

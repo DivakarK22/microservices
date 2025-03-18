@@ -5,6 +5,8 @@ COPY ./ /etc/yum.repos.d/
 COPY ./ /etc/sensu/
 COPY server.sh /usr/local/bin/
 
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
 #Install Java and tomcat and move to path
 RUN yum install sudo wget epel-release java-11-openjdk-devel sensu  -y && \
